@@ -16,7 +16,7 @@ public class LogRotationChecker {
             return new Evaluation(Result.PASS, "Logging disabled");
         }
 
-        boolean centralized = getBool(props, "Logging.centralized", false);
+        boolean centralized = getBool(props, "logging.centralized", false);
         boolean rotationEnabled = getBool(props, "rotation.enabled", false);
 
         if (!rotationEnabled) {
@@ -53,6 +53,11 @@ public class LogRotationChecker {
             return new Evaluation(Result.WARN, "Log size " + sizeMb + "MB exceeds the soft limit " + softLimitMb + "MB");
         }
 
+        // Centralized defaults to WARN unless explicitly opted-out
+        boolean centralizedPassOptOut = getBool(props, "rotation.centralizedPassAllowed", false);
+        if (centralized && !centralizedPassOptOut) {
+            return new Evaluation(Result.WARN, "Rotation healthy (centralized logging enabled)");
+        }
         if (centralized) {
             return new Evaluation(Result.PASS, "Rotation healthy (centralized logging enabled)");
         }
@@ -125,5 +130,7 @@ public class LogRotationChecker {
                 map.put(key, val);
             }
         }
+
+        return map;
     }
 }

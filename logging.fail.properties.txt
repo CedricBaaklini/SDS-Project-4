@@ -1,0 +1,16 @@
+hostname=api-01
+
+#local logging enabled?
+logging.enabled=true
+
+# Centralized logging 
+logging.centralized=true
+
+# Rotation info
+rotation.enabled=true
+rotation.lastRotated=2025-09-25
+rotation.maxDays=7
+
+# Optional: current log size and soft limit for WARN
+log.currentSizeMB=450
+log.softLimitMB=500
