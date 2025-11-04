@@ -8,7 +8,7 @@ logging.centralized=true
 
 # Rotation info
 rotation.enabled=true
-rotation.lastRotated=2025-10-27
+rotation.lastRotated=2025-11-03
 rotation.maxDays=7
 
 # Optional: current log size and soft limit for WARN
